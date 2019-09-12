@@ -29,21 +29,21 @@ public class DisplayCart extends HttpServlet {
 		String password = context.getInitParameter("pass");
 
 		HttpSession session = request.getSession();
-		ArrayList<String> list = (ArrayList<String>) session
-				.getAttribute("cart");
+		ArrayList<String> list = (ArrayList<String>) session.getAttribute("cart");
 
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		out.println("<html><body>");
 		if (list == null) {
 			out.println("<h4>Your Cart Is Empty</h4>");
-			out.println("<h5><a href=SubjectServlet>Start-Buying</a></h5>");
+			out.println("<h5><a href=SubjectPageServlet>Start-Buying</a></h5>");
 
 		} else {
 			out.println("<h3>YOUR CART</h3>");
 			String sql = "Select * from books where bookId in " + list;
 			sql = sql.replace('[', '(');
 			sql = sql.replace(']', ')');
+			System.out.println(sql);
 			try {
 				Class.forName(className);
 				Connection con = DriverManager.getConnection(url, user,

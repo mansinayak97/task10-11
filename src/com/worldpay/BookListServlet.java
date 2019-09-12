@@ -24,17 +24,29 @@ public class BookListServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String subject=request.getParameter("subject");
-		Cookie cSub=new Cookie("sub",subject);
-		cSub.setMaxAge(7*24*60*60);
-		response.addCookie(cSub);
+		StringBuffer sb=new StringBuffer();
+		String subject[]=request.getParameterValues("subject");
+		for(String i:subject){
+			//StringBuffer i1=new StringBuffer(i);
+			sb=sb.append("'");
+			sb=sb.append(i);
+			sb=sb.append("'");
+			sb=sb.append(",");
+		}
+		sb=sb.replace(sb.length()-1, sb.length(), "");
+		System.out.println(sb);
+		//Cookie cSub=new Cookie("sub",subject);
+		//cSub.setMaxAge(7*24*60*60);
+		//response.addCookie(cSub);
 		PrintWriter out=response.getWriter();
 		try{
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/db","root","root");
-		String sql="SELECT bookId,bookName from books where genre=?";
+		String sql="SELECT bookId,bookName from books where genre in ("+sb+")";
+		/*sql.replace('{', '(');
+		sql.replace('}', ')');*/
 		PreparedStatement ps=con.prepareStatement(sql);
-		ps.setString(1, subject);
+		//ps.setString(1, subject);
 		ResultSet rs=ps.executeQuery();
 		out.println("<html>");
 		out.println("<html><body>");

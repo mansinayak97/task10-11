@@ -26,7 +26,8 @@ public class CartManager extends HttpServlet {
 		list.add(code);
 		
 		session.setAttribute("cart",list);
-		response.sendRedirect("SubjectPageServlet");
+		System.out.println();response.sendRedirect("SubjectPageServlet");
+		
 	}
 
 }

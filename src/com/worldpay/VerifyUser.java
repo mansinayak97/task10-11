@@ -31,12 +31,12 @@ public class VerifyUser extends HttpServlet {
 		
 		
 		PrintWriter out = response.getWriter();
-		String userid = request.getParameter("userid");
+		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		String utype = request.getParameter("utype");
 		try {
 			if (utype.equals("owner")) {
-				if (userid.equals(adminId) && password.equals(adminPassword)) {
+				if (userName.equals(adminId) && password.equals(adminPassword)) {
 					response.sendRedirect("adminpage.jsp");
 				} else {
 					out.println("INVALID CREDENTIALS FOR ADMIN");
@@ -49,21 +49,21 @@ public class VerifyUser extends HttpServlet {
 								"root", "root");
 				String sql = "SELECT username FROM USERS where username=? AND password=?";
 				PreparedStatement ps = con.prepareStatement(sql);
-				ps.setString(1, userid);
+				ps.setString(1, userName);
 				ps.setString(2, password);
 				ResultSet rs = ps.executeQuery();
 				if (rs.next()) {
 					
-					//storing userid in session
+					//storing userName in session
 					//step1 fetch session object
 					HttpSession session=request.getSession();
-					session.setAttribute("user", userid);
+					session.setAttribute("user", userName);
 					
 					// whether user want to save the password
 					String choice = request.getParameter("save");
 					if (choice != null) {
 
-						Cookie c1 = new Cookie("id", userid);
+						Cookie c1 = new Cookie("uName", userName);
 						Cookie c2 = new Cookie("pw", password);
 
 						c1.setMaxAge(60 * 60 * 24 * 7);

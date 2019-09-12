@@ -11,9 +11,10 @@
 	<hr>
 	<pre>
 		<a href="SubjectPageServlet">Explore-Store</a>
-		<a href="">Search-Book</a>
+		<a href="ShowBooks.jsp">View All Books</a>
+		<a href="SubjectCascading.jsp">Search-Book</a>
 		<a href="DisplayCart">View-Cart</a>
-		<a href="">Trace-Order</a>
+		<a href="ShowProfile.jsp">User Profile</a>
 		<a href="">Logout</a>
 	</pre>		
 	<hr>

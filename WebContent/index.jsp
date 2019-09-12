@@ -8,7 +8,7 @@
 	if(ck!=null)
 		for(Cookie c:ck){
 			String name=c.getName();
-			if(name.equals("id")){
+			if(name.equals("uName")){
 				s1=c.getValue();
 			}else if(name.equals("pw")){
 				s2=c.getValue();
@@ -24,7 +24,7 @@
 	<hr>
 	<form action="VerifyUser">
 	<pre>
-		Userid		<input type="text" name="userid" value="<%=s1%>" />
+		Username		<input type="text" name="userName" value="<%=s1%>" />
 		Password	<input type="password" name="password" value="<%=s2%>"/>
 		RememberMe	<input type="checkbox" name="save" value="yes" checked="checked" />
 		Usertype	owner	<input type="radio" name="utype" value="owner" checked="checked"/>
